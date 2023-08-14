@@ -79,6 +79,34 @@ string Compiler::getOutputPath ()
     return this->outputPath;
 }
 
+// Returns a split string
+vector<string> Compiler::splitString (string& input, char delimiter) 
+{
+    vector<string> result;
+    size_t start = 0;
+    size_t end = input.find(delimiter);
+
+    while (end != std::string::npos) {
+        result.push_back(input.substr(start, end - start));
+        start = end + 1;
+        end = input.find(delimiter, start);
+    }
+
+    // Push the last part of the string after the last delimiter
+    result.push_back(input.substr(start));
+
+    return result;
+}
+
+// Returns a string with all whitespaces removed
+void Compiler::trim (string& str)
+{
+    for (int i = 0; i < str.length(); i++) {
+        if (str.at(i) == ' ') {
+            str.erase(i, 1);
+        }
+    }
+}
 
 // Takes a string and returns the ID and CLASS provided
 string Compiler::getIDandClassParams (string lineData, int last_index)
@@ -125,7 +153,6 @@ string Compiler::getIDandClassParams (string lineData, int last_index)
     return paramString;
 }
 
-
 // Finds all anchor tags and replaces them
 string Compiler::replaceAnchors(string lineData)
 {
@@ -153,7 +180,7 @@ string Compiler::replaceAnchors(string lineData)
         lineData.erase(lineData.find('('), lineData.find(')') - lineData.find('(') + 1);
         
         // Remove parameters
-        if (paramString != "") lineData.erase(lineData.find('{'), lineData.find('}') - lineData.find('{') + 1);
+        if (paramString != "") lineData.erase(lineData.find_first_of('{'), lineData.find_first_of('}') - lineData.find_first_of('{') + 1);
     }
     return lineData;
 }
@@ -234,7 +261,7 @@ vector<string> Compiler::interpretLineData (vector<string> inputData)
             string paramString = getIDandClassParams(lineData, 4);
 
             // Parameters were given, remove parameters from string
-            if (paramString != "") lineData.erase(lineData.find_first_of('{'), lineData.find_last_of('}') - lineData.find_first_of('{') + 1);
+            if (paramString != "") lineData.erase(lineData.find_first_of('{'), lineData.find_first_of('}') - lineData.find_first_of('{') + 1);
 
             // Replace #1 with <h1>
             lineData.replace(0, 2, "<h" + string(1, size) + paramString + ">");
@@ -333,7 +360,7 @@ vector<string> Compiler::interpretLineData (vector<string> inputData)
             string params = getIDandClassParams(lineData, 1); 
 
             // Remove param args
-            if (params != "") lineData.erase(lineData.find_first_of('{'), lineData.find_last_of('}') - lineData.find_first_of('{') + 1);
+            if (params != "") lineData.erase(lineData.find_first_of('{'), lineData.find_first_of('}') - lineData.find_first_of('{') + 1);
 
             // Convert to <button> tag
             lineData.insert(0, "<button" + params + ">");
@@ -349,6 +376,57 @@ vector<string> Compiler::interpretLineData (vector<string> inputData)
         } else if (lineData.substr(0, 4) == "!INP") {
             // Remove !INP tag
             lineData.erase(0, 4);
+
+            // Get input parameters
+            string typeParamString = lineData.substr(lineData.find_first_of('[') + 1, lineData.find_first_of(']') - lineData.find_first_of('[') - 1);
+
+            // Get ID/class parameters
+            string classParams = getIDandClassParams(lineData, lineData.find_first_of(']') + 2);
+            if (classParams != "") lineData.erase(lineData.find_first_of('{'), lineData.find_first_of('}') - lineData.find_first_of('{') + 1);
+
+            // Remove input parameters
+            lineData.erase(lineData.find_first_of('['), lineData.find_first_of(']') - lineData.find_first_of('[') + 1);
+
+            // Remove whitespace before value
+            for (int i = 0; i < lineData.length(); i++) {
+                if (lineData.at(i) == ' ') {
+                    lineData.erase(i, 1);
+                    i--;
+                } else break;
+            }
+
+            // Get vector with inputs
+            vector<string> typeParamList = splitString(typeParamString, ',');
+
+            // Holds the inputted values
+            bool required = false;
+            bool placeholder = false;
+            string type = "";
+
+            // Find values in string
+            for (string& str : typeParamList) {
+                trim(str);
+
+                if (str == "r") required = true;
+                else if (str == "placeholder") placeholder = true;
+                else type = str;
+            }
+
+            string openTag = "<input type=\"" + type + "\"" + classParams;
+
+            // Convert to <input> tag
+            if (required) openTag.append(" required");
+            if (placeholder) openTag.append(" placeholder=\"");
+            else openTag.append(" value=\"");
+
+            lineData.insert(0, openTag);
+            lineData.append("\">");
+            
+            // Add indent
+            lineData.insert(0, indent + "   ");
+
+            // Add new data back into vector
+            interpretedData.push_back(lineData); 
 
         // NOTHING, ASSUME P
         } else if (lineData != "") {

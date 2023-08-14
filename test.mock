@@ -10,6 +10,14 @@
 
 #4 Hello world!
 
+
+!INP[text, r, placeholder]{.PLACEHOLDERHERELOL}         This is a required placeholder
+!INP[text, r]{#IDHere.helloWorld} This is required
+!INP[password] This is not!
+
+
+
+
 hi there, this is a P tag
 
 

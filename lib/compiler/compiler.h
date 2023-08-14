@@ -22,6 +22,10 @@ class Compiler
         string getIDandClassParams (string, int);
         string replaceAnchors (string);
 
+        // Utility functions
+        vector<string> splitString (string&, char);
+        void trim (string&);
+
         // Setters
         void setInputPath (string path);
         void setOutputPath (string path);

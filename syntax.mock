@@ -7,7 +7,7 @@
 
 normal text like this       <p> normal text like this </p> 
 
-UL
+!UL
 - Unordered list items like this
 - More list items
 /UL
@@ -17,7 +17,7 @@ UL
     <li> More list items </li>
 </ul>
 
-OL
+!OL
 - Ordered list items like this 
 - More list items like this 
 /OL
@@ -38,7 +38,7 @@ anchor here: [website](https://website.com)     <p> anchor here <a href="https:/
 
 // This is a comment        <!-- This is a comment --> 
 
-DIV {#idHere.NAMED}
+!DIV {#idHere.NAMED}
     Indent based structure will be used.
     This is inside the div
 /DIV
