@@ -101,9 +101,12 @@ vector<string> Compiler::splitString (string& input, char delimiter)
 // Returns a string with all whitespaces removed
 void Compiler::trim (string& str)
 {
-    for (int i = 0; i < str.length(); i++) {
+    int i = 0;
+    while (i < str.length()) {
         if (str.at(i) == ' ') {
             str.erase(i, 1);
+        } else {
+            i++;
         }
     }
 }
