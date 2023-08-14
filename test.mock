@@ -1,0 +1,50 @@
+@title Mock Test File
+@style ./style.css
+@style ./stylesheets/style.css
+
+#1{#ID.class} Hello world
+#1{.class#ID} Hello world
+
+// This is a comment
+#2 {#ID} Hello again
+
+#4 Hello world!
+
+hi there, this is a P tag
+
+
+#3 {.classHere}hello finally 
+
+{#pTag.helloWorld} Hello world!
+
+
+This is also a p tag!!
+    Hello World!
+        More info here
+    This is funny!
+    {.bottomFeeder} This is more text HERE!
+
+@html           <h1> This was written raw </h1>
+
+            // These are also comments
+
+    @html                             <h6> I like it raw ;) </h6>
+
+
+this is an [anchor](https://youtube.com){#testAnchorID.classNameHere}
+
+
+#1 [also an anchor](https://google.com)
+
+
+this is an [anchor](https://netflix.com){.PTag}, but this is not
+
+!BTN Hello world!
+
+    !BTN{.helloWorld} click me please
+
+!BTN{#submitButton} Submit!
+
+@script ./javascript.js
+
+    @script script.js
