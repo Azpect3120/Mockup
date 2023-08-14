@@ -402,6 +402,7 @@ vector<string> Compiler::interpretLineData (vector<string> inputData)
             bool required = false;
             bool placeholder = false;
             string type = "";
+            
 
             // Find values in string
             for (string& str : typeParamList) {
