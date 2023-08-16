@@ -49,7 +49,7 @@ void ASTNode::setChildren (vector<ASTNode> children)
 // Utils
 void ASTNode::printNode ()
 {
-    std::cout << this->data << std::endl;
+    std::cout << this->data << " (" << this->indentCount << ")" << std::endl;
 }
 
 void ASTNode::printChildren ()
