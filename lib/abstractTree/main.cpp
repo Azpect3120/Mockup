@@ -13,9 +13,9 @@ int main ()
     ASTNode sub3 {"SUB 3", 1};
     ASTNode sub4 {"SUB 4", 1};
 
-    ASTNode sub5  {"SUB 1 SUB 5", 2};    
-    ASTNode sub6  {"SUB 1 SUB 6", 2};    
-    ASTNode sub7  {"SUB 2 SUB 7", 2};    
+    ASTNode sub5  {"SUB 5", 2};    
+    ASTNode sub6  {"SUB 6", 2};    
+    ASTNode sub7  {"SUB 7", 2};    
 
     sub1.setChildren(vector<ASTNode> {sub5, sub6});
     sub2.setChildren(vector<ASTNode> {sub7});

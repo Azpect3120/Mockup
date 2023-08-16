@@ -62,6 +62,12 @@ void ASTNode::printChildren ()
 
 void ASTNode::printTree (ASTNode node)
 {
+    int* indentCount = node.getIndentCount();
+    
+    for (int i = 0; i < *indentCount; i++) {
+        std::cout << "  ";
+    }
+
     std::cout << node.data << std::endl;
     vector<ASTNode>& children = *node.getChildren();
     for (const ASTNode& node : children) {
@@ -69,13 +75,3 @@ void ASTNode::printTree (ASTNode node)
     }
 
 }
-/*
-void printTreeHelper (ASTNode node)
-{
-    node.printNode();
-    vector<ASTNode>& children = *node.getChildren();
-    for (const ASTNode& node : children) {
-        printTreeHelper(node);
-    }
-}
-*/
