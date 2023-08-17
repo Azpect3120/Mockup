@@ -25,6 +25,7 @@ class ASTNode
         void setData (string);
         void setIndentCount (int);
         void setChildren (vector<ASTNode>);
+        void addChild (ASTNode);
 
         // Utils
         void printNode ();

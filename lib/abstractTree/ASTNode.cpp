@@ -46,6 +46,11 @@ void ASTNode::setChildren (vector<ASTNode> children)
     this->children = children;
 }
 
+void ASTNode::addChild (ASTNode child)
+{
+    this->children.push_back(child);
+}
+
 // Utils
 void ASTNode::printNode ()
 {

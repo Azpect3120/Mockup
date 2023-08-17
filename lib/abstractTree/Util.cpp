@@ -17,6 +17,7 @@ int countIndents (string& str)
             break;
         }
     }
+    
     // Debugging
     // std::cout << count << "  ->  " << count / 3 <<  std::endl;
 
