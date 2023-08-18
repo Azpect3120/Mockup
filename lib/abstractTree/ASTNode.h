@@ -9,20 +9,23 @@ class ASTNode
 {
     private:
         string data;
+        ASTNode* parent;
         int indentCount;
         vector<ASTNode> children;
 
     public:
         // Constructor
-        ASTNode (string, int);
+        ASTNode (ASTNode&, string, int);
 
         // Getters
         string* getData ();
         int* getIndentCount ();
         vector<ASTNode>* getChildren ();
+        ASTNode* getParent ();
 
         // Setters
         void setData (string);
+        void setParent (ASTNode);
         void setIndentCount (int);
         void setChildren (vector<ASTNode>);
         void addChild (ASTNode);

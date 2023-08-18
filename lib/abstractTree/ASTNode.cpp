@@ -7,9 +7,10 @@
 using std::string, std::vector;
 
 // Constructor
-ASTNode::ASTNode (string data, int indentCount)
+ASTNode::ASTNode (ASTNode& parent, string data, int indentCount)
 {
     this->data = data;
+    this->parent = &parent;
     this->indentCount = indentCount;
     this->children = vector<ASTNode>();
 }
@@ -28,6 +29,11 @@ int* ASTNode::getIndentCount ()
 vector<ASTNode>* ASTNode::getChildren ()
 {
     return &children;
+}
+
+ASTNode* ASTNode::getParent ()
+{
+    return parent;
 }
 
 // Setters
@@ -49,6 +55,11 @@ void ASTNode::setChildren (vector<ASTNode> children)
 void ASTNode::addChild (ASTNode child)
 {
     this->children.push_back(child);
+}
+
+void ASTNode::setParent (ASTNode parent)
+{
+    this->parent = &parent;
 }
 
 // Utils

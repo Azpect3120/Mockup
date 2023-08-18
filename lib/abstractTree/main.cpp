@@ -78,7 +78,8 @@ int main ()
 
     // root.printTree(root);
 
-    // READING FILE
+    /*
+    // READING FILE AND USING STACK
     // ----------------------------------------
     string inputPath = "./test.mock";   // Input file path
 
@@ -140,6 +141,10 @@ int main ()
 
     std::cout << "\nTree: " << std::endl;
     ROOT.printTree(ROOT);   // Display final tree
+    */
+
+    // READING FILE AND NOT USING STACK: NODE BEING REFACTORED TO HOLD THE VALUES OF THEIR PARENT
+    // ----------------------------------------
 
     return 0;
 }

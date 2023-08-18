@@ -35,7 +35,7 @@ void removeIndents (string& str)
     }
 }
 
-ASTNode createNode (string& str)
+ASTNode createNode (ASTNode& parent, string& str)
 {
     int indents = countIndents(str);
 
@@ -43,5 +43,5 @@ ASTNode createNode (string& str)
     // std::cout << str << " (" << indents << ")" << std::endl;
 
     removeIndents(str);
-    return ASTNode {str, indents};
+    return ASTNode {parent, str, indents};
 }
