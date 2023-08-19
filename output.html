@@ -1,67 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Mock Test File</title>
-    <link rel="stylesheet" href=" ./style.css">
-    <link rel="stylesheet" href=" ./stylesheets/style.css">
-</head>
-<body>
+Root
+    @title Mock Test File
+    @style ./style.css
+    @style ./stylesheets/style.css
     
-   <h1 id="ID" class="class"> Hello world</h1>
-   <h1 id="ID" class="class"> Hello world</h1>
+    #1{#ID.class} Hello world
+    #1{.class#ID} Hello world
     
-   <!--This is a comment-->
-   <h2 id="ID">  Hello again</h2>
+    // This is a comment
+    #2 {#ID} Hello again
     
-   <h4> Hello world!</h4>
+    #4 Hello world!
     
     
-   <input type="text" class="PLACEHOLDERHERELOL" required placeholder="This is a required placeholder">
-   <input type="text" id="IDHere" class="helloWorld" required value="This is required">
-   <input type="password" value="This is not!">
+    !INP[text, r, placeholder]{.LOL}         This is a required placeholder
+    !INP[text, r]{#IDHere.helloWorld} This is required
+    !INP[password] This is not!
     
     
     
     
-   <p>hi there, this is a P tag</p>
+    hi there, this is a P tag
     
     
-   <h3 class="classHere"> hello finally </h3>
+    #3 {.classHere}hello finally 
     
-   <p id="pTag" class="helloWorld"> Hello world!</p>
-    
-    
-   <p>This is also a p tag!!</p>
-       <p>Hello World!</p>
-           <p>More info here</p>
-       <p>This is funny!</p>
-       <p class="bottomFeeder"> This is more text HERE!</p>
-    
-   <h1> This was written raw </h1>
-    
-               <!--These are also comments-->
-    
-       <h6> I like it raw ;) </h6>
+    {#pTag.helloWorld} Hello world!
     
     
-   <p>this is an <a href="https://youtube.com" id="testAnchorID" class="classNameHere">anchor</a></p>
+    This is also a p tag!!
+        Hello World!
+            More info here
+        This is funny!
+        {.bottomFeeder} This is more text HERE!
+    
+    @html           <h1> This was written raw </h1>
+    
+                // These are also comments
+    
+        @html                             <h6> I like it raw ;) </h6>
     
     
-   <h1> <a href="https://google.com">also an anchor</a></h1>
+    this is an [anchor](https://youtube.com){#testAnchorID.classNameHere}
     
     
-   <p>this is an <a href="https://netflix.com" class="PTag">anchor</a>, but this is not</p>
+    #1 [also an anchor](https://google.com)
     
-   <button>Hello world!</button>
     
-       <button class="helloWorld"> click me please</button>
+    this is an [anchor](https://netflix.com){.PTag}, but this is not
     
-   <button id="submitButton"> Submit!</button>
+    !BTN Hello world!
     
-   <script src="./javascript.js"></script>
+        !BTN{.helloWorld} click me please
     
-       <script src="script.js"></script>
-</body>
-</html>
+    !BTN{#submitButton} Submit!
+    
+    @script ./javascript.js
+    
+        @script script.js
