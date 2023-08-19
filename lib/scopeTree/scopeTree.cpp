@@ -57,6 +57,8 @@ void ScopeTree::traverseDFS (TreeNode* node, std::ofstream& outFile)
     for (TreeNode* child : node->children) {
         traverseDFS(child, outFile);
     }
+
+    // Write closing tag here
 }
 
 // Write the tree to a file
@@ -72,6 +74,18 @@ void ScopeTree::writeTreeToFile (const string& filename)
     traverseDFS(root, outFile);
 
     outFile.close();
+}
+
+// Print the tree to the console
+void ScopeTree::printTree (TreeNode* node)
+{
+    if (!node) return;
+
+    std::cout << node->data << std::endl;
+
+    for (TreeNode* child : node->children) {
+        printTree(child);
+    }
 }
 
 int ScopeTree::countLeadingSpaces(const string& line) {

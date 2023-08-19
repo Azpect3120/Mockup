@@ -17,6 +17,7 @@ class ScopeTree
         void buildTreeFromFile (const string&);
         void traverseDFS (TreeNode*, std::ofstream&);
         void writeTreeToFile (const string&);
+        void printTree (TreeNode*);
 
     private:
         int countLeadingSpaces (const string&);

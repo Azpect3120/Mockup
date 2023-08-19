@@ -1,36 +1,16 @@
-#pragma once // Ensures the file is only included once
-#include <iostream>
-#include <vector>
+#pragma once
+
+#include <string>
+
+#include "../scopeTree/scopeTree.h"
+#include "../scopeTree/treeNode.h"
 
 
-using std::string;
-using std::vector;
+#ifndef COMPILER_H
+#define COMPILER_H
 
-class Compiler
-{    
-    private:
-        string inputPath;
-        string outputPath;
+void compileTree (TreeNode*);
+void compileNode (TreeNode*);
+void trim (std::string&);
 
-    public:
-        // File handling
-        vector<string> readInput ();
-        void writeOutput (vector<string>);
-
-        // Compiler functions
-        vector<string> interpretLineData (vector<string>);
-        string getIDandClassParams (string, int);
-        string replaceAnchors (string);
-
-        // Utility functions
-        vector<string> splitString (string&, char);
-        void trim (string&);
-
-        // Setters
-        void setInputPath (string path);
-        void setOutputPath (string path);
-
-        // Getters
-        string getInputPath ();
-        string getOutputPath ();
-};
+#endif
