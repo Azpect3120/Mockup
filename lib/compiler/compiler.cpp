@@ -16,9 +16,14 @@ void compileTree (TreeNode* root, string path)
 {
     std::ofstream outputFile(path);
 
+
+    outputFile << "<DOCTYPE! html>\n<html lang=\"en\">" << std::endl;
+
     for (TreeNode* child : root->children) {
         compileNode(child, outputFile);
     }
+
+    outputFile << "</html>";
 }
 
 // Compile the data in the <node>
@@ -45,7 +50,7 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
             }
 
             // Write nodes closing data
-            int indentCount = countIndentLevel(node->data);
+            int indentCount = countIndentLevel(node->data) - 1;
             for (int i = 0; i < indentCount; i++) {outputFile << "    ";}
             outputFile << "</div>" << std::endl;
         }
@@ -65,7 +70,7 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
             }
 
             // Write nodes closing data
-            int indentCount = countIndentLevel(node->data);
+            int indentCount = countIndentLevel(node->data) - 1;
             for (int i = 0; i < indentCount; i++) {outputFile << "    ";}  
             outputFile << "</ul>" << std::endl;
         }
@@ -85,7 +90,7 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
             }
 
             // Write nodes closing data
-            int indentCount = countIndentLevel(node->data);
+            int indentCount = countIndentLevel(node->data) - 1;
             for (int i = 0; i < indentCount; i++) {outputFile << "    ";}
             outputFile << "</ol>" << std::endl;
 
@@ -102,10 +107,20 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
     } else if (node->data.at(node->data.find_first_not_of(' ')) == '#') {
         // Determine the size of the heading 
         char size = node->data.at(node->data.find_first_of('#') + 1);
+
+        // Ensure valid size
+        if (size > '6') {
+            size = '6';
+        } else if (size < '1') {
+            size = '1';
+        }
+
+        // Convert char to h<size> string
         string tag = "h" + std::to_string(size - '0');
 
+
         // Remove heading identifier
-        node->data.erase(node->data.find_first_of('#'), 2);
+        node->data.erase(node->data.find_first_of('#'), 3);
 
         // Add heading tags
         node->data.insert(node->data.find_first_not_of(' '), "<" + tag + ">");
@@ -158,5 +173,5 @@ int countIndentLevel (string& str)
     while (count < str.size() && str[count] == ' ') {
         count++;
     }
-    return count / 4;
+    return (count / 4) + 1;
 }
