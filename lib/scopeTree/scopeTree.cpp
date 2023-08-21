@@ -17,30 +17,35 @@ ScopeTree::ScopeTree ()
 // Build the tree from a text file
 void ScopeTree::buildTreeFromFile(const string& filename)
 {
+    // Open file
     std::ifstream file(filename);
+    
+    // Error opening file
     if (!file.is_open()) {
         std::cerr << "Unable to open file: " << filename << std::endl;
         return;
     }
 
+    // Set the current parent to be the root
     TreeNode* currentParent = root;
     std::string line;
 
+    // Read lines in file
     while (std::getline(file, line)) {
-        // Add a single indent padding to each line
-        // As well as allow lines to be skipped
-        line.insert(0, "    ");
+        // Skips empty lines
+        if (!line.empty()) {
 
-        int indentLevel = countLeadingSpaces(line);
-        TreeNode* newNode = new TreeNode(line);
+            int indentLevel = countIndentLevel(line);
+            TreeNode* newNode = new TreeNode(line);
 
-        // Find the parent node based on the indentation level
-        while (indentLevel <= countIndentLevel(currentParent->data)) {
-            currentParent = currentParent->parent;
+            // Find the parent node based on the indentation level
+            while (indentLevel <= countIndentLevel(currentParent->data)) {
+                currentParent = currentParent->parent;
+            }
+
+            currentParent->addChild(newNode);
+            currentParent = newNode;
         }
-
-        currentParent->addChild(newNode);
-        currentParent = newNode;
     }
 
     file.close();
@@ -81,7 +86,7 @@ void ScopeTree::printTree (TreeNode* node)
 {
     if (!node) return;
 
-    std::cout << node->data << std::endl;
+    std::cout << node->data << " (" << node->children.size() << ")" << std::endl;
 
     for (TreeNode* child : node->children) {
         printTree(child);

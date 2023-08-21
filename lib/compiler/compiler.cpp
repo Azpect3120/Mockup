@@ -35,7 +35,7 @@ void compileNode (TreeNode* node)
                 compileNode(child);
             }
 
-            std::cout << node->data.insert(node->data.find("div"), "/") << std::endl;
+            //std::cout << node->data.insert(node->data.find("div"), "/") << std::endl;
         }
 
         // UL tag
@@ -47,7 +47,7 @@ void compileNode (TreeNode* node)
                 compileNode(child);
             }
 
-            std::cout << node->data.insert(node->data.find("ul"), "/") << std::endl;
+            // std::cout << node->data.insert(node->data.find("ul"), "/") << std::endl;
         }
 
         // OL tag
@@ -60,7 +60,7 @@ void compileNode (TreeNode* node)
                 compileNode(child);
             }
 
-            std::cout << node->data.insert(node->data.find("ol"), "/") << std::endl;
+            // std::cout << node->data.insert(node->data.find("ol"), "/") << std::endl;
         }
     } else {
         std::cout << node->data << std::endl;

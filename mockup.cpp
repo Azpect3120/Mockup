@@ -16,14 +16,17 @@ int main ()
     tree.buildTreeFromFile("./example.mock");
     
     // Print tree to console
-    // tree.printTree(tree.root);
+    std::cout << "Tree:" << std::endl;
+    tree.printTree(tree.root);
 
+    std::cout << "\nRoot children: " << std::endl;
     for (TreeNode* children : tree.root->children) {
         std::cout << children->data << std::endl;
     }
 
     // Compile tree
-    compileTree(tree.root);
+    // std::cout << "\nCompiling tree: " << std::endl;
+    // compileTree(tree.root);
 
     // Print compiled tree to console
     // tree.printTree(tree.root);

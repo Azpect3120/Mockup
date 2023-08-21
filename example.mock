@@ -1,16 +1,15 @@
-@DIV
-    #1 Hello world!
-    This was compiled using my own scripting language!
-
-#2 No longer inside the div!
-
-@OL
-    items here
-    more items here
-    these are also items
-
-@UL 
-    unordered items
     @DIV
-        subtext!
-        #1 LOL THIS IS BIG
+        #1 Hello world!
+        This was compiled using my own scripting language!
+    #2 No longer inside the div!
+    
+    @OL
+        items here
+        more items here
+        these are also items
+
+    @UL 
+        unordered items
+        @DIV
+            subtext!
+            #1 LOL THIS IS BIG
