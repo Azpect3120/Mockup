@@ -83,5 +83,20 @@ DIV{.classHere} This creates a div with a class
 
 HEADERS
 --------------------------------------------------
-@title Title here
-@style ./style.css
+$TITLE Title here
+$STYLE ./style.css
+
+
+BLOCK SCOPE TAGS
+--------------------------------------------------
+@DIV
+@UL / @OL
+@HEAD
+@BODY
+
+
+INLINE SCOPE TAGS
+--------------------------------------------------
+$TITLE
+$STYLE
+$SCRIPT
