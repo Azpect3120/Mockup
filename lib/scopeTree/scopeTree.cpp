@@ -33,19 +33,20 @@ void ScopeTree::buildTreeFromFile(const string& filename)
     // Read lines in file
     while (std::getline(file, line)) {
         // Skips empty lines
-        if (!line.empty()) {
-
-            int indentLevel = countIndentLevel(line);
-            TreeNode* newNode = new TreeNode(line);
-
-            // Find the parent node based on the indentation level
-            while (indentLevel <= countIndentLevel(currentParent->data)) {
-                currentParent = currentParent->parent;
-            }
-
-            currentParent->addChild(newNode);
-            currentParent = newNode;
+        if (line.empty()) {
+            line = "    ";
         }
+
+        int indentLevel = countIndentLevel(line);
+        TreeNode* newNode = new TreeNode(line);
+
+        // Find the parent node based on the indentation level
+        while (indentLevel <= countIndentLevel(currentParent->data)) {
+            currentParent = currentParent->parent;
+        }
+
+        currentParent->addChild(newNode);
+        currentParent = newNode;
     }
 
     file.close();
@@ -93,6 +94,7 @@ void ScopeTree::printTree (TreeNode* node)
     }
 }
 
+// Return the number of leading spaces in a string
 int ScopeTree::countLeadingSpaces(const string& line) {
     int count = 0;
     while (count < line.size() && line[count] == ' ') {
@@ -101,6 +103,7 @@ int ScopeTree::countLeadingSpaces(const string& line) {
     return count;
 }
 
+// Return the number of leading indents in a string
 int ScopeTree::countIndentLevel(const string& line) {
     int spaces = countLeadingSpaces(line);
     return spaces / 4; // Assuming 4 spaces per indentation level

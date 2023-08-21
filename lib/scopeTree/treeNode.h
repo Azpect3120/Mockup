@@ -15,4 +15,5 @@ class TreeNode {
 
         TreeNode (const string&);
         void addChild (TreeNode*);
+        void insertChild (TreeNode*, int);
 };
