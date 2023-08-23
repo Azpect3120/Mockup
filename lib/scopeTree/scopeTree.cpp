@@ -32,21 +32,23 @@ void ScopeTree::buildTreeFromFile(const string& filename)
 
     // Read lines in file
     while (std::getline(file, line)) {
-        // Skips empty lines
-        //if (line.empty()) {
+        // Skips blank lines
+        if (!line.empty()) {
+            // Add extra indent
+            // Allows the tree to read data that has no indents and still apply it to the tree
             line.insert(0, "    ");
-        //}
+        
+            int indentLevel = countIndentLevel(line);
+            TreeNode* newNode = new TreeNode(line);
 
-        int indentLevel = countIndentLevel(line);
-        TreeNode* newNode = new TreeNode(line);
+            // Find the parent node based on the indentation level
+            while (indentLevel <= countIndentLevel(currentParent->data)) {
+                currentParent = currentParent->parent;
+            }
 
-        // Find the parent node based on the indentation level
-        while (indentLevel <= countIndentLevel(currentParent->data)) {
-            currentParent = currentParent->parent;
+            currentParent->addChild(newNode);
+            currentParent = newNode;
         }
-
-        currentParent->addChild(newNode);
-        currentParent = newNode;
     }
 
     file.close();

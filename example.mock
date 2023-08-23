@@ -1,24 +1,39 @@
 @HEAD
-    $TITLE Title here!
     $STYLE ./style.css
     $STYLE ./style2.css
     $SCRIPT script file here
+    $TITLE Title here!
 
 @BODY
+
+
+
     @DIV
         #1 Hello world!
         This was compiled using my own scripting language!
+
+
+
+
     #2 No longer inside the div!
     
+
+
+
     @OL
         items here
         more items here
         these are also items
+    
+
+
 
     @UL 
         unordered items
         subtext!
         #1 LOL THIS IS BIG
+    
+
 
 
     @DIV
@@ -30,5 +45,8 @@
         #5 h5
         #6 h6
         #7 h6
-        
+    
+
+
+
     $SCRIPT ./javascript.js

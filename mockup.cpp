@@ -17,7 +17,7 @@ int main ()
     
     // Print tree to console
     // std::cout << "Raw tree:" << std::endl;
-    // tree.printTree(tree.root);
+    tree.printTree(tree.root);
 
     // Compile tree
     // Writes to file

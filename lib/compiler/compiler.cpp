@@ -155,7 +155,7 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
         // TITLE tag
         if (node->data.find("TITLE") != string::npos) {
             // Remove title tag
-            node->data.replace(node->data.find("TITLE"), 5, "<title>");
+            node->data.replace(node->data.find("TITLE"), 6, "<title>");
 
             // Add closing tag
             node->data.append("</title>");
