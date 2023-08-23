@@ -221,6 +221,19 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
             compileNode(child, outputFile);
         }
 
+    // Check if node is a comment (//)
+    } else if (node->data.at(node->data.find_first_not_of(' ')) == '/' && node->data.at(node->data.find_first_not_of(' ') + 1) == '/') {
+        // Add <!-- --> tags
+        node->data.replace(node->data.find_first_of("//"), 2 , "<!--");
+        node->data.append(" -->");
+
+        // Write node data
+        outputFile << node->data << std::endl;
+
+        // Write childrens data
+        for (TreeNode* child : node->children) {
+            compileNode(child, outputFile);
+        }
     
     // Node was not handled by other syntax: assume paragraph (p)    
     } else {

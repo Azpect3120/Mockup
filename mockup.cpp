@@ -14,8 +14,6 @@ int main ()
     ScopeTree tree;
 
     // Create tree from file
-    // tree.buildTreeFromFile("./example.mock");
-    std::string path = "./example.mock";
     tree.root = TreeBuilder::buildTree("./example.mock", tree.root);
 
     // Print tree to console
@@ -25,7 +23,7 @@ int main ()
     // Compile tree
     // Writes to file
     std::cout << "Compiling..." << std::endl;
-    compileTree(tree.root, "./output.html");
+    compileTree(tree.root, "./build/output.html");
     std::cout << "Compilation complete!" << std::endl;
 
     return 0;
