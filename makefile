@@ -5,7 +5,7 @@ COMP = g++
 OUT = ./build/mockup.exe
 
 # Sources
-SRCS = ./mockup.cpp ./lib/compiler/compiler.cpp ./lib/scopeTree/scopeTree.cpp ./lib/scopeTree/treeNode.cpp
+SRCS = ./mockup.cpp ./lib/compiler/compiler.cpp ./lib/scopeTree/scopeTree.cpp ./lib/scopeTree/treeNode.cpp ./lib/scopeTree/treeBuilder.cpp
 
 all: $(OUT)
 

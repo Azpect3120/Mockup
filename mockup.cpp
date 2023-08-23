@@ -6,6 +6,7 @@
 #include "./lib/compiler/compiler.h"
 #include "./lib/scopeTree/scopeTree.h"
 #include "./lib/scopeTree/treeNode.h"
+#include "./lib/scopeTree/treeBuilder.h"
 
 int main ()
 {
@@ -13,8 +14,10 @@ int main ()
     ScopeTree tree;
 
     // Create tree from file
-    tree.buildTreeFromFile("./example.mock");
-    
+    // tree.buildTreeFromFile("./example.mock");
+    std::string path = "./example.mock";
+    tree.root = TreeBuilder::buildTree("./example.mock", tree.root);
+
     // Print tree to console
     // std::cout << "Raw tree:" << std::endl;
     tree.printTree(tree.root);
