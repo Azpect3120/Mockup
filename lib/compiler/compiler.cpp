@@ -64,8 +64,10 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
             
             // Write nodes childrens data
             for (TreeNode* child : node->children) {
-                // child->data.insert(child->data.find_first_not_of(' '), "<li>");
-                // child->data.append("</li>");
+                // Add $LI to child if not exist
+                if (child->data.find("$LI") == string::npos) {
+                    child->data.insert(child->data.find_first_not_of(' '), "$LI ");
+                }
                 compileNode(child, outputFile);
             }
 
@@ -84,8 +86,10 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
             
             // Write nodes childrens data
             for (TreeNode* child : node->children) {
-                // child->data.insert(child->data.find_first_not_of(' '), "<li>");
-                // child->data.append("</li>");
+                // Add $LI to child if not exist
+                if (child->data.find("$LI") == string::npos) {
+                    child->data.insert(child->data.find_first_not_of(' '), "$LI ");
+                }
                 compileNode(child, outputFile);
             }
 
@@ -184,6 +188,26 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
 
             // Write node data
             outputFile << node->data << std::endl;
+
+        // LIST ITEM tag
+        } else if (node->data.find("LI") != string::npos) {
+            // Get the indent count
+            int indentCount = countIndentLevel(node->data) - 1;
+
+            // Write opening tag
+            for (int i = 0; i < indentCount; i++) {outputFile << "    ";}
+            outputFile << "<li>" << std::endl;
+
+            // Remove $LI tag
+            node->data.erase(node->data.find_first_of("$LI"), 3);
+            // node->data.insert(0, "    ");
+
+            // Write node data
+            compileNode(node, outputFile);
+
+            // Write closing tag
+            for (int i = 0; i < indentCount; i++) {outputFile << "    ";}
+            outputFile << "</li>" << std::endl;
 
         // Unhandled 
         } else {

@@ -31,11 +31,11 @@ int main ()
 
     std::tm* ptm = std::localtime(&now_c);
     std::ostringstream oss;
-    oss << std::put_time(ptm, "%m-%d(%H:%M:%S)");
+    oss << std::put_time(ptm, "%m-%d-%H:%M:%S");
     std::string timestamp = oss.str();
 
     // Create output path from timestamp
-    std::string outputPath = "./build/output" + timestamp + ".html";
+    std::string outputPath = "./build/output-" + timestamp + ".html";
 
     // Compile tree
     // Writes to file
