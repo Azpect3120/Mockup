@@ -43,6 +43,7 @@ void compileNode (TreeNode* node, std::ofstream& outputFile, int indentBooster)
 
         // DIV tag
         if (node->data.find("DIV") != string::npos) {
+            // Remove div identifier
             node->data.replace(node->data.find("DIV"), 3, "<div>");
             
             // Write nodes data
@@ -58,6 +59,15 @@ void compileNode (TreeNode* node, std::ofstream& outputFile, int indentBooster)
             for (int i = 0; i < indentCount; i++) {outputFile <<  "    ";}
             outputFile << boost <<  "</div>" << std::endl;
         
+        // HTML tag
+        } else if (node->data.find("HTML") != string::npos) {
+            // Remove html identifier
+            node->data.clear();
+
+            // Use helper to write raw html for each file
+            for (TreeNode* child : node->children) {
+                writeRawHtml(child, outputFile, 1);
+            }
 
         // UL tag
         } else if (node->data.find("UL") != string::npos) {
@@ -193,6 +203,14 @@ void compileNode (TreeNode* node, std::ofstream& outputFile, int indentBooster)
             // Write node data
             outputFile << boost <<  node->data << std::endl;
 
+        // HTML tag
+        } else if (node->data.find("HTML") != string::npos) {
+            /// Remove html tag
+            node->data.erase(node->data.find("HTML"), 5);
+
+            // Write node data
+            outputFile << boost << node->data << std::endl;
+
         // LIST ITEM tag
         } else if (node->data.find("LI") != string::npos) {
             // Get the indent count
@@ -231,7 +249,6 @@ void compileNode (TreeNode* node, std::ofstream& outputFile, int indentBooster)
 
         // Convert char to h<size> string
         string tag = "h" + std::to_string(size - '0');
-
 
         // Remove heading identifier
         node->data.erase(node->data.find_first_of('#'), 3);
@@ -280,18 +297,21 @@ void compileNode (TreeNode* node, std::ofstream& outputFile, int indentBooster)
 
 }
 
-// Trim whitespace before and after <str>
-void trim (string& str)
+// Used to write raw html data
+void writeRawHtml (TreeNode* node, std::ofstream& outputFile, int indentDecrement)
 {
-    size_t first = str.find_first_not_of(' ');
-    if (first == string::npos) {
-        str.clear();
-        return;
-    }
+    // Handle indent Decrement
+    node->data.erase(0, 4 * indentDecrement);
 
-    size_t last = str.find_last_not_of(' ');
-    str = str.substr(first, (last - first + 1));
+    // Write node data
+    outputFile << node->data << std::endl;
+
+    // Write child data
+    for (TreeNode* child : node->children) {
+        writeRawHtml(child, outputFile, indentDecrement);
+    }
 }
+
 
 // Returns the number of leading indents in <str>
 int countIndentLevel (string& str)

@@ -12,7 +12,7 @@
 
 void compileTree (TreeNode*, std::string);
 void compileNode (TreeNode*, std::ofstream&, int);
-void trim (std::string&);
+void writeRawHtml (TreeNode*, std::ofstream&, int);
 
 int countIndentLevel (std::string&);
 

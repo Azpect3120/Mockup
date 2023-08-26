@@ -25,11 +25,19 @@
             @DIV
             Not inside the div
 
+    @HTML
+        <button> Click Me! </button>
+        <div>
+            <h1> This was also written using the @HTML tag </h1>
+        </div>
+
     @DIV
         #7 h6
         @DIV
             @DIV
                 #1 Hello world
+
+    $HTML <button> This is html </button>
 
     // Link js file
     $SCRIPT ./javascript.js

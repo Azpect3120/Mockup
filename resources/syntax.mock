@@ -85,6 +85,7 @@ HEADERS
 --------------------------------------------------
 $TITLE Title here
 $STYLE ./style.css
+$SCRIPT ./script.js
 
 
 BLOCK SCOPE TAGS
@@ -93,6 +94,7 @@ BLOCK SCOPE TAGS
 @UL / @OL
 @HEAD
 @BODY
+@HTML
 
 
 INLINE SCOPE TAGS
@@ -101,3 +103,8 @@ $TITLE
 $STYLE
 $SCRIPT
 $LI
+$HTML
+
+OTHER SYNTAX 
+--------------------------------------------------
+#<1-6>
