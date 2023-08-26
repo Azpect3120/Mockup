@@ -17,18 +17,22 @@ void compileTree (TreeNode* root, string path)
     std::ofstream outputFile(path);
 
 
-    outputFile << "<DOCTYPE! html>\n<html lang=\"en\">" << std::endl;
+    outputFile <<  "<DOCTYPE! html>\n<html lang=\"en\">" << std::endl;
 
     for (TreeNode* child : root->children) {
-        compileNode(child, outputFile);
+        compileNode(child, outputFile, 0);
     }
 
-    outputFile << "</html>";
+    outputFile <<  "</html>";
 }
 
 // Compile the data in the <node>
-void compileNode (TreeNode* node, std::ofstream& outputFile)
+void compileNode (TreeNode* node, std::ofstream& outputFile, int indentBooster)
 {
+    // Create indent booster
+    string boost;
+    for (int i = 0; i < indentBooster; i++) {boost.append("    ");};
+
     // Line was blank, return
     if (node->data.find_first_not_of(' ') == string::npos) return;
 
@@ -42,17 +46,17 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
             node->data.replace(node->data.find("DIV"), 3, "<div>");
             
             // Write nodes data
-            outputFile << node->data << std::endl;
+            outputFile << boost <<  node->data << std::endl;
             
             // Write nodes childrens data
             for (TreeNode* child : node->children) {
-                compileNode(child, outputFile);
+                compileNode(child, outputFile, indentBooster);
             }
 
             // Write nodes closing data
             int indentCount = countIndentLevel(node->data) - 1;
-            for (int i = 0; i < indentCount; i++) {outputFile << "    ";}
-            outputFile << "</div>" << std::endl;
+            for (int i = 0; i < indentCount; i++) {outputFile <<  "    ";}
+            outputFile << boost <<  "</div>" << std::endl;
         
 
         // UL tag
@@ -60,7 +64,7 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
             node->data.replace(node->data.find("UL"), 2, "<ul>");
             
             // Write node data
-            outputFile << node->data << std::endl;
+            outputFile << boost <<  node->data << std::endl;
             
             // Write nodes childrens data
             for (TreeNode* child : node->children) {
@@ -68,13 +72,13 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
                 if (child->data.find("$LI") == string::npos) {
                     child->data.insert(child->data.find_first_not_of(' '), "$LI ");
                 }
-                compileNode(child, outputFile);
+                compileNode(child, outputFile, indentBooster);
             }
 
             // Write nodes closing data
             int indentCount = countIndentLevel(node->data) - 1;
-            for (int i = 0; i < indentCount; i++) {outputFile << "    ";}  
-            outputFile << "</ul>" << std::endl;
+            for (int i = 0; i < indentCount; i++) {outputFile << boost <<  "    ";}  
+            outputFile << boost <<  "</ul>" << std::endl;
         
 
         // OL tag
@@ -82,7 +86,7 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
             node->data.replace(node->data.find("OL"), 2, "<ol>");
             
             // Write node data
-            outputFile << node->data << std::endl;
+            outputFile << boost <<  node->data << std::endl;
             
             // Write nodes childrens data
             for (TreeNode* child : node->children) {
@@ -90,30 +94,30 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
                 if (child->data.find("$LI") == string::npos) {
                     child->data.insert(child->data.find_first_not_of(' '), "$LI ");
                 }
-                compileNode(child, outputFile);
+                compileNode(child, outputFile, indentBooster);
             }
 
             // Write nodes closing data
             int indentCount = countIndentLevel(node->data) - 1;
-            for (int i = 0; i < indentCount; i++) {outputFile << "    ";}
-            outputFile << "</ol>" << std::endl;
+            for (int i = 0; i < indentCount; i++) {outputFile << boost <<  "    ";}
+            outputFile << boost <<  "</ol>" << std::endl;
 
         // BODY tag
         } else if (node->data.find("BODY") != string::npos) { 
             node->data.replace(node->data.find("BODY"), 4, "<body>");
 
             // Write node data
-            outputFile << node->data << std::endl;
+            outputFile << boost <<  node->data << std::endl;
             
             // Write nodes childrens data
             for (TreeNode* child : node->children) {
-                compileNode(child, outputFile);
+                compileNode(child, outputFile, indentBooster);
             }
 
             // Write nodes closing data
             int indentCount = countIndentLevel(node->data) - 1;
-            for (int i = 0; i < indentCount; i++) {outputFile << "    ";}
-            outputFile << "</body>" << std::endl;
+            for (int i = 0; i < indentCount; i++) {outputFile << boost <<  "    ";}
+            outputFile << boost <<  "</body>" << std::endl;
 
         
         // HEAD tag
@@ -121,33 +125,33 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
             node->data.replace(node->data.find("HEAD"), 4, "<head>");
 
             // Write node data
-            outputFile << node->data << std::endl;
+            outputFile << boost <<  node->data << std::endl;
 
             // Determine indent count
             int indentCount = countIndentLevel(node->data);
 
             // Add standard meta-data
-            for (int i = 0; i < indentCount; i++) {outputFile << "    ";}
-            outputFile << "<meta charset=\"UTF-8\">" << std::endl;
+            for (int i = 0; i < indentCount; i++) {outputFile << boost <<  "    ";}
+            outputFile << boost <<  "<meta charset=\"UTF-8\">" << std::endl;
 
-            for (int i = 0; i < indentCount; i++) {outputFile << "    ";}
-            outputFile << "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" << std::endl;            
+            for (int i = 0; i < indentCount; i++) {outputFile << boost <<  "    ";}
+            outputFile << boost <<  "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" << std::endl;            
             
             // Write nodes childrens data
             for (TreeNode* child : node->children) {
-                compileNode(child, outputFile);
+                compileNode(child, outputFile, indentBooster);
             }
 
             // Write nodes closing data
-            for (int i = 1; i < indentCount; i++) {outputFile << "    ";}
-            outputFile << "</head>" << std::endl;
+            for (int i = 1; i < indentCount; i++) {outputFile << boost <<  "    ";}
+            outputFile << boost <<  "</head>" << std::endl;
 
         // Line was not handled with other syntax
         } else {
-            outputFile << node->data << std::endl;
+            outputFile << boost <<  node->data << std::endl;
 
             for (TreeNode* child : node->children) {
-                compileNode(child, outputFile);
+                compileNode(child, outputFile, indentBooster);
             }
         }
 
@@ -165,7 +169,7 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
             node->data.append("</title>");
 
             // Write node data
-            outputFile << node->data << std::endl;
+            outputFile << boost <<  node->data << std::endl;
 
         // STYLE tag
         } else if (node->data.find("STYLE") != string::npos) {
@@ -176,7 +180,7 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
             node->data.append("\">");
 
             // Write node data
-            outputFile << node->data << std::endl;
+            outputFile << boost <<  node->data << std::endl;
 
         // SCRIPT tag
         } else if (node->data.find("SCRIPT") != string::npos) {
@@ -187,7 +191,7 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
             node->data.append("\"></script>");
 
             // Write node data
-            outputFile << node->data << std::endl;
+            outputFile << boost <<  node->data << std::endl;
 
         // LIST ITEM tag
         } else if (node->data.find("LI") != string::npos) {
@@ -195,23 +199,22 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
             int indentCount = countIndentLevel(node->data) - 1;
 
             // Write opening tag
-            for (int i = 0; i < indentCount; i++) {outputFile << "    ";}
-            outputFile << "<li>" << std::endl;
+            for (int i = 0; i < indentCount; i++) {outputFile << boost <<  "    ";}
+            outputFile << boost <<  "<li>" << std::endl;
 
             // Remove $LI tag
             node->data.erase(node->data.find_first_of("$LI"), 3);
-            // node->data.insert(0, "    ");
 
             // Write node data
-            compileNode(node, outputFile);
+            compileNode(node, outputFile, indentBooster + 1);
 
             // Write closing tag
-            for (int i = 0; i < indentCount; i++) {outputFile << "    ";}
-            outputFile << "</li>" << std::endl;
+            for (int i = 0; i < indentCount; i++) {outputFile << boost <<  "    ";}
+            outputFile << boost <<  "</li>" << std::endl;
 
         // Unhandled 
         } else {
-            outputFile << node->data << std::endl;
+            outputFile << boost <<  node->data << std::endl;
         }
 
     // Check if first character is a heading (#<1-6>)
@@ -238,11 +241,11 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
         node->data.append("</" + tag + ">");
 
         // Write node data
-        outputFile << node->data << std::endl;
+        outputFile << boost <<  node->data << std::endl;
 
         // Write nodes childrens data
         for (TreeNode* child : node->children) {
-            compileNode(child, outputFile);
+            compileNode(child, outputFile, indentBooster);
         }
 
     // Check if node is a comment (//)
@@ -252,11 +255,11 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
         node->data.append(" -->");
 
         // Write node data
-        outputFile << node->data << std::endl;
+        outputFile << boost <<  node->data << std::endl;
 
         // Write childrens data
         for (TreeNode* child : node->children) {
-            compileNode(child, outputFile);
+            compileNode(child, outputFile, indentBooster);
         }
     
     // Node was not handled by other syntax: assume paragraph (p)    
@@ -266,11 +269,11 @@ void compileNode (TreeNode* node, std::ofstream& outputFile)
         node->data.append("</p>");
 
         // Write node data
-        outputFile << node->data << std::endl;
+        outputFile << boost <<  node->data << std::endl;
 
         // Write nodes childrens data
         for (TreeNode* child : node->children) {
-            compileNode(child, outputFile);
+            compileNode(child, outputFile, indentBooster);
         }
     }
 

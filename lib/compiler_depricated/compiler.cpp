@@ -50,7 +50,7 @@ void Compiler::writeOutput (vector<string> fileData)
 
     // Write <fileData> into the file
     for (const auto& lineData : fileData) {
-        outputFile << lineData << std::endl;
+        outputFile << boost <<  lineData << std::endl;
     }
 
     // Close the file

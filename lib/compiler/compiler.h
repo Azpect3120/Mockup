@@ -11,7 +11,7 @@
 #define COMPILER_H
 
 void compileTree (TreeNode*, std::string);
-void compileNode (TreeNode*, std::ofstream&);
+void compileNode (TreeNode*, std::ofstream&, int);
 void trim (std::string&);
 
 int countIndentLevel (std::string&);
