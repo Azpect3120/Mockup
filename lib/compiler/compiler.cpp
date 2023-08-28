@@ -11,6 +11,22 @@
 using std::string;
 using std::vector;
 
+// Element properties (class and id)
+struct Properties
+{
+    string ID;
+    string CLASS;
+};
+
+// Gets the properties from a node and returns an Properties struct
+Properties getProperties (TreeNode* node)
+{
+    Properties properties;
+    properties.CLASS = "className";
+    properties.ID = "IDName";
+    return properties;
+}
+
 // Compile the entire tree starting at <node>
 void compileTree (TreeNode* root, string path)
 {

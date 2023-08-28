@@ -23,7 +23,7 @@ int main ()
 
     // Print tree to console
     // std::cout << "Raw tree:" << std::endl;
-    tree.printTree(tree.root);
+    // tree.printTree(tree.root);
 
     // Get current time and convert to string
     auto now = std::chrono::system_clock::now();

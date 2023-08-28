@@ -1,30 +1,3 @@
-#1 This is an h1 tag        <h1> This is an h1 tag </h1>
-#2 This is an h2 tag        <h2> This is an h2 tag </h2>
-#3 h3                       <h3> h3 </h3> ect...
-#4 h4
-#5 h5
-#6 h6
-
-normal text like this       <p> normal text like this </p> 
-
-@UL
-- Unordered list items like this
-- More list items
-
-<ul>
-    <li> Unordered list items like this </li>
-    <li> More list items </li>
-</ul>
-
-@OL
-- Ordered list items like this 
-- More list items like this 
-
-<ol>
-    <li> Ordered list items like this </li>
-    <li> More list items items like this </li>
-</ol>
-
 anchor here: [website](https://website.com)     <p> anchor here <a href="https://website.com"> website </a> </p>
 
 !INP[text] This is an input tag             <input type="text"> This is an input tag </input>
@@ -34,41 +7,12 @@ anchor here: [website](https://website.com)     <p> anchor here <a href="https:/
 !BTN Click me!                              <button> Click me! </button>
 !BTN{#buttonOne.buttonTwo} Click me!        <button id="buttonOne" class="buttonTwo"> Click me! </button>
 
-// This is a comment        <!-- This is a comment --> 
-
-@DIV {#idHere.NAMED}
-    Indent based structure will be used.
-    This is inside the div
-But this is no longer inside the div
-
-<div>
-    <p> Indent based structure will be used. </p>
-    <p> This is inside the div </p>
-</div>
-<p> But this is no longer inside the div </p>
-
-
 *Italics*               <i>Italics</i>
 **Bold**                <b>Bold</b>
 ***Bold italics***      <i><b>Bold italics</b></i>
 
 This text is <inside a span tag> and this is not        <p> This text is <span> inside a span tag </span> and this is not
 
-
-@html <h1> This allows the user to enter raw HTML </h1>     <h1> This allows the user to enter raw HTML </h1>
-
-@html {
-    <div>
-        <h1> This allows the user to enter blocks of raw HTML </h1>
-    </div>
-}
-
-<div>
-    <h1> This allows the user to enter blocks of raw HTML </h1>
-</div>
-
-
-@script ./javascript.js     <script src="./javascript.js"></script>
 
 CLASSES AND ID's HERE 
 --------------------------------------------------
