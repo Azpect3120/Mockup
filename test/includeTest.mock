@@ -1,0 +1,10 @@
+@HEAD
+    $TITLE Hello world!
+
+@BODY
+    $INCLUDE ./test/views/list.mock
+
+
+    --------
+
+    $INCLUDE ./test/views/user.mock

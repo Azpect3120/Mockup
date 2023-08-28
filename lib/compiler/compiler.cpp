@@ -7,6 +7,7 @@
 
 #include "../scopeTree/scopeTree.h"
 #include "../scopeTree/treeNode.h"
+#include "../scopeTree/treeBuilder.h"
 
 using std::string;
 using std::vector;
@@ -103,7 +104,7 @@ void compileNode (TreeNode* node, std::ofstream& outputFile, int indentBooster)
 
             // Write nodes closing data
             int indentCount = countIndentLevel(node->data) - 1;
-            for (int i = 0; i < indentCount; i++) {outputFile << boost <<  "    ";}  
+            for (int i = 0; i < indentCount; i++) {outputFile <<  "    ";}  
             outputFile << boost <<  "</ul>" << std::endl;
         
 
@@ -125,7 +126,7 @@ void compileNode (TreeNode* node, std::ofstream& outputFile, int indentBooster)
 
             // Write nodes closing data
             int indentCount = countIndentLevel(node->data) - 1;
-            for (int i = 0; i < indentCount; i++) {outputFile << boost <<  "    ";}
+            for (int i = 0; i < indentCount; i++) {outputFile <<  "    ";}
             outputFile << boost <<  "</ol>" << std::endl;
 
         // BODY tag
@@ -233,8 +234,11 @@ void compileNode (TreeNode* node, std::ofstream& outputFile, int indentBooster)
             int indentCount = countIndentLevel(node->data) - 1;
 
             // Write opening tag
-            for (int i = 0; i < indentCount; i++) {outputFile << boost <<  "    ";}
-            outputFile << boost <<  "<li>" << std::endl;
+            outputFile << boost;    
+            for (int i = 0; i < indentCount; i++) {
+                outputFile <<  "    ";
+            }
+            outputFile << "<li>" << std::endl;
 
             // Remove $LI tag
             node->data.erase(node->data.find_first_of("$LI"), 3);
@@ -243,8 +247,32 @@ void compileNode (TreeNode* node, std::ofstream& outputFile, int indentBooster)
             compileNode(node, outputFile, indentBooster + 1);
 
             // Write closing tag
-            for (int i = 0; i < indentCount; i++) {outputFile << boost <<  "    ";}
-            outputFile << boost <<  "</li>" << std::endl;
+            outputFile << boost;
+            for (int i = 0; i < indentCount; i++) {
+                outputFile <<  "    ";
+            }
+            outputFile << "</li>" << std::endl;
+
+        // INCLUDE tag
+        } else if (node->data.find("INCLUDE") != string::npos) {
+            // Get indent level for booster
+            int indentLevel = countIndentLevel(node->data) - 2;
+
+            // Remove include tag
+            node->data.erase(node->data.find_first_of("INCLUDE"), 8);
+
+            // Generate formatted path
+            string path = node->data.substr(node->data.find_first_not_of(' '), node->data.length() - node->data.find_first_not_of(' '));
+
+            // Build new tree from path
+            ScopeTree module;
+            module.root = TreeBuilder::buildTree(path, module.root);
+
+            // Write tree
+            for (TreeNode* child : module.root->children) {
+                compileNode(child, outputFile, indentBooster + indentLevel);
+            }
+
 
         // Unhandled 
         } else {

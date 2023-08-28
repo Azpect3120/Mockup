@@ -5,11 +5,21 @@
     $TITLE Title here!
 
 @BODY
+    
+    @DIV
+        @DIV
+            $INCLUDE ./test/views/user.mock
+
+
     @DIV
         #1 Hello world!
         This was compiled using my own scripting language!
 
-    #2 No longer inside the div!
+    No longer inside the div!
+
+    #1 Module Here!!
+    $INCLUDE ./test/views/list.mock
+
     
     @OL
         items here

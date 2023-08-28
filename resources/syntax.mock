@@ -48,6 +48,7 @@ $STYLE
 $SCRIPT
 $LI
 $HTML
+$INCLUDE
 
 OTHER SYNTAX 
 --------------------------------------------------

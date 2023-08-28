@@ -19,7 +19,8 @@ int main ()
     ScopeTree tree;
 
     // Create tree from file
-    tree.root = TreeBuilder::buildTree("./example.mock", tree.root);
+    tree.root = TreeBuilder::buildTree("./test/example.mock", tree.root);
+    // tree.root = TreeBuilder::buildTree("./test/includeTest.mock", tree.root);
 
     // Print tree to console
     // std::cout << "Raw tree:" << std::endl;
